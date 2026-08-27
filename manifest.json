@@ -1,0 +1,27 @@
+{
+  "name": "احتمال‌چی",
+  "short_name": "احتمال‌چی",
+  "description": "اپلیکیشن آموزشی و بازی‌محور احتمال ریاضی پایه نهم - کاملا آفلاین",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#6C4EE3",
+  "theme_color": "#6C4EE3",
+  "orientation": "portrait-primary",
+  "dir": "rtl",
+  "lang": "fa",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

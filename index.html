@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#6C4EE3">
+<meta name="description" content="احتمال‌چی - اپلیکیشن آموزشی و بازی‌محور احتمال ریاضی پایه نهم">
+<title>🎲 احتمال‌چی</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json" id="manifestLink">
+<link rel="icon" id="favicon" href="">
+</head>
+<body>
+
+<div id="toast" class="toast"></div>
+
+<header class="topbar">
+  <div class="brand" id="brandHome">
+    <span class="brand-emoji">🎲</span>
+    <span class="brand-text">احتمال‌چی</span>
+  </div>
+  <div class="stats">
+    <div class="stat-pill score-pill">
+      <span class="stat-icon">🏆</span>
+      <span id="topScore">0</span>
+    </div>
+    <div class="stat-pill coin-pill">
+      <span class="stat-icon">🪙</span>
+      <span id="topCoins">0</span>
+    </div>
+  </div>
+</header>
+
+<main id="app">
+
+  <!-- ===================== HOME SCREEN ===================== -->
+  <section class="screen active" id="screen-home">
+    <div class="hero">
+      <div class="hero-dice">🎲</div>
+      <h1 class="hero-title">احتمال‌چی</h1>
+      <p class="hero-sub">یاد بگیر، حل کن، امتیاز بگیر!</p>
+    </div>
+
+    <div class="progress-overview card">
+      <div class="po-item">
+        <span class="po-label">پیشرفت کلی</span>
+        <div class="po-bar"><div class="po-bar-fill" id="overallProgressFill"></div></div>
+      </div>
+      <div class="po-numbers">
+        <span>🏆 امتیاز: <b id="homeScore">0</b></span>
+        <span>🪙 سکه: <b id="homeCoins">0</b></span>
+      </div>
+    </div>
+
+    <div class="stage-grid" id="stageGrid">
+      <!-- stage cards injected by JS -->
+    </div>
+
+    <button class="secondary-btn" id="btnMistakes">📒 اشتباهات من</button>
+    <button class="ghost-btn" id="btnReset">🔄 شروع دوباره پیشرفت</button>
+  </section>
+
+  <!-- ===================== LESSON SCREEN ===================== -->
+  <section class="screen" id="screen-lesson">
+    <button class="back-btn" data-back="home">→ بازگشت</button>
+    <div class="lesson-card card" id="lessonContent">
+      <!-- injected by JS -->
+    </div>
+    <button class="primary-btn big-btn" id="btnStartQuiz">شروع آزمون 🚀</button>
+  </section>
+
+  <!-- ===================== QUIZ SCREEN ===================== -->
+  <section class="screen" id="screen-quiz">
+    <button class="back-btn" data-back="home">→ خروج از آزمون</button>
+
+    <div class="quiz-progress">
+      <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+      <div class="quiz-progress-text">سؤال <span id="quizCurrentNum">1</span> از <span id="quizTotalNum">10</span></div>
+    </div>
+
+    <div class="quiz-card card" id="quizCard">
+      <div class="quiz-level-tag" id="quizLevelTag">متوسط</div>
+      <h3 class="quiz-question" id="quizQuestionText">متن سؤال</h3>
+      <div class="quiz-options" id="quizOptions">
+        <!-- options injected -->
+      </div>
+
+      <div class="hint-row">
+        <button class="hint-btn" id="btnHint">💡 راهنمایی (۲ سکه)</button>
+        <div class="hint-box" id="hintBox"></div>
+      </div>
+    </div>
+
+    <div class="feedback-panel" id="feedbackPanel">
+      <div class="feedback-header" id="feedbackHeader"></div>
+      <div class="feedback-body">
+        <div class="fb-row" id="fbUserAnswer"></div>
+        <div class="fb-row" id="fbCorrectAnswer"></div>
+        <div class="fb-block" id="fbWrongReason"></div>
+        <div class="fb-block">
+          <h4>راه‌حل مرحله به مرحله:</h4>
+          <ol id="fbSteps"></ol>
+        </div>
+        <div class="fb-block">
+          <h4>📘 نکته آموزشی</h4>
+          <p id="fbExplanation"></p>
+        </div>
+        <div class="fb-formula" id="fbFormula"></div>
+        <div class="fb-fraction" id="fbFraction"></div>
+      </div>
+      <button class="primary-btn" id="btnNextQuestion">سؤال بعد ←</button>
+    </div>
+  </section>
+
+  <!-- ===================== RESULT SCREEN ===================== -->
+  <section class="screen" id="screen-result">
+    <div class="result-card card">
+      <div class="result-emoji" id="resultEmoji">🎉</div>
+      <h2 class="result-title" id="resultTitle">آفرین!</h2>
+      <div class="result-stats">
+        <div class="rs-item"><span>✅ پاسخ درست</span><b id="resCorrect">0</b></div>
+        <div class="rs-item"><span>❌ پاسخ غلط</span><b id="resWrong">0</b></div>
+        <div class="rs-item"><span>📊 درصد موفقیت</span><b id="resPercent">0%</b></div>
+        <div class="rs-item"><span>🏆 امتیاز این مرحله</span><b id="resScore">0</b></div>
+        <div class="rs-item"><span>🪙 سکه کسب‌شده</span><b id="resCoins">0</b></div>
+      </div>
+      <div class="result-status" id="resultStatus"></div>
+      <div class="result-actions">
+        <button class="primary-btn" id="btnNextStage">مرحله بعد →</button>
+        <button class="secondary-btn" id="btnRetryStage">تلاش دوباره 🔁</button>
+        <button class="ghost-btn" id="btnGoHome">بازگشت به خانه</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MISTAKES SCREEN ===================== -->
+  <section class="screen" id="screen-mistakes">
+    <button class="back-btn" data-back="home">→ بازگشت</button>
+    <h2 class="page-title">📒 اشتباهات من</h2>
+    <div id="mistakesList" class="mistakes-list"></div>
+    <p class="empty-msg" id="mistakesEmpty">هنوز اشتباهی ثبت نشده! عالی پیش می‌ری 👏</p>
+  </section>
+
+</main>
+
+<div class="confetti-layer" id="confettiLayer"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
